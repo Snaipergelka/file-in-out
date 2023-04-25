@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+
+  files-backend:
+    build: .
+    command: bash -c "/wait && cd backend/database && alembic upgrade head && cd / && python3 /backend/src/main.py"
+    container_name: files-backend
+    env_file:
+      - .env
+    environment:
+      - WAIT_HOSTS=files-postgres:5432
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+    depends_on:
+      - files-postgres
+      - files-redis
+
+  files-postgres:
+    container_name: files-postgres
+    image: postgres:14.1-alpine
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - postgres_db:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  files-redis:
+    container_name: files-redis
+    image: redis
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_db:
+    driver: local
