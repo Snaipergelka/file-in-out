@@ -4,7 +4,7 @@ class RedisQueue:
     def __init__(self, session_maker):
         print("Created Redis!")
         self.session_maker = session_maker
-        self.key = '%s:%s' %("namespace", "name")
+        self.key = '%s:%s' % ("namespace", "name")
 
     def push_data(self, data):
         result = self.session_maker.rpush(self.key, data)

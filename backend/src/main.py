@@ -55,7 +55,8 @@ if __name__ == "__main__":
     container.wire(modules=[__name__])
 
     # start 1st process
-    p1 = Process(target=enqueue_image, kwargs={"directory": get_settings().TEST_DIRECTORY})
+    p1 = Process(target=enqueue_image,
+                 kwargs={"directory": get_settings().TEST_DIRECTORY})
     p1.start()
     p1.join()
 
