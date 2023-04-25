@@ -1,0 +1,29 @@
+# api
+fastapi[all]~=0.92.0
+uvicorn~=0.20.0
+starlette~=0.25.0
+pydantic~=1.10.5
+dependency-injector
+aiohttp~=3.8.4
+mock
+configargparse
+python-multipart
+
+#db
+sqlalchemy
+alembic
+psycopg2-binary
+asyncpg
+greenlet
+
+#queue
+redis
+
+# hooks
+pre-commit
+flake8
+
+# tests
+pytest-asyncio
+
+Pillow
